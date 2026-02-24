@@ -1,0 +1,340 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  background-color: #2e2e2e;
+  min-height: 100vh;
+}
+
+/* PAGE HEADER */
+.page-header {
+  background-color: #c0151a;
+  width: 100%;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+}
+
+.page-header-title {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  background-color: #2e2e2e;
+  min-height: calc(100vh - 56px);
+}
+
+.sidebar-left,
+.sidebar-right {
+  background-color: #d0d0d0;
+  flex: 1;
+}
+
+.form-container {
+  background-color: #4a4a4a;
+  width: 540px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 36px;
+}
+
+.form-container h1 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  padding: 16px 0;
+  margin-bottom: 28px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.form-body {
+  padding: 0 32px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #f0f0f0;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group textarea,
+.form-group input[type="file"] {
+  font-family: "Roboto", Arial, sans-serif;
+  background-color: #d6d6d6;
+  border: none;
+  border-left: 4px solid #c0151a;
+  padding: 9px 11px;
+  font-size: 13px;
+  color: #1a1a1a;
+  outline: none;
+  width: 100%;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="date"]:focus,
+.form-group textarea:focus {
+  border-left-color: #8f0f13;
+  background-color: #e4e4e4;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 76px;
+  font-family: "Roboto", Arial, sans-serif;
+}
+
+.form-group input[type="file"] {
+  padding: 7px 11px;
+  cursor: pointer;
+}
+
+.form-divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin: 22px 0 18px 0;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.btn-back {
+  font-family: "Roboto", Arial, sans-serif;
+  padding: 8px 18px;
+  font-size: 12px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  background-color: #95a5a6;
+  color: #f0f0f0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: background-color 0.2s;
+}
+
+.btn-back:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-clear {
+  font-family: "Roboto", Arial, sans-serif;
+  padding: 8px 18px;
+  font-size: 12px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  background-color: #e74c3c;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: background-color 0.2s;
+}
+
+.btn-clear:hover {
+  background-color: rgba(192, 21, 26, 0.22);
+}
+
+.btn-submit {
+  font-family: "Roboto", Arial, sans-serif;
+  padding: 8px 22px;
+  font-size: 12px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  background-color: #2ecc71;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: background-color 0.2s;
+}
+
+.btn-submit:hover {
+  background-color: #2c6e00;
+}
+
+body.read-page {
+  background-color: #f2f2f2;
+  font-family: "Roboto", Arial, sans-serif;
+}
+
+.read-page .page-header {
+  background-color: #c0151a;
+  /* border-bottom: 3px solid #8f0f13; */
+}
+
+.read-page .page-wrapper {
+  background-color: #f2f2f2;
+  display: block;
+  padding: 32px 40px 48px 40px;
+  min-height: calc(100vh - 56px);
+}
+
+.read-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.read-toolbar-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: 0.3px;
+}
+
+.btn-ajukan {
+  font-family: "Roboto", Arial, sans-serif;
+  background-color: #c0151a;
+  color: #ffffff;
+  border: none;
+  padding: 10px 24px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.2s;
+}
+
+.btn-ajukan:hover {
+  background-color: #8f0f13;
+}
+
+.table-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #c0151a;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 13px;
+}
+
+.data-table thead tr {
+  background-color: #c0151a;
+}
+
+.data-table th {
+  text-align: center;
+  padding: 13px 14px;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid #ebebeb;
+  transition: background-color 0.15s;
+}
+
+.data-table tbody tr:nth-child(even) {
+  background-color: #fdf3f3;
+}
+
+.data-table tbody tr:hover {
+  background-color: #fde8e8;
+}
+
+.data-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.data-table td {
+  text-align: center;
+  padding: 12px 14px;
+  color: #333333;
+  font-size: 13px;
+}
+
+.link-update {
+  font-family: "Roboto", Arial, sans-serif;
+  color: #ffffff;
+  background-color: #c0151a;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  padding: 5px 14px;
+  border-radius: 3px;
+  display: inline-block;
+  text-transform: uppercase;
+  transition: background-color 0.2s;
+}
+
+.link-update:hover {
+  background-color: #8f0f13;
+}
+.action-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-action {
+  font-family: "Roboto", Arial, sans-serif;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-action:hover {
+  opacity: 0.85;
+}
+
+.btn-edit {
+  background-color: #28a745;
+  color: #ffffff;
+}
+
+.btn-delete {
+  background-color: #e84118;
+  color: #ffffff;
+}

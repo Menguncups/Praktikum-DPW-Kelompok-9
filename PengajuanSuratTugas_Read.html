@@ -3,35 +3,85 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Pengajuan Surat Tugas — Daftar</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
-<a href="./PengajuanSuratTugas_Create.html">
-    <button>Ajukan Surat</button>
-</a>
+<body class="read-page">
 
-    <table border="1">
-        <tr align="center">
-            <th>No</th>
-            <th>Pengusul</th>
-            <th>Waktu Pelaksanaan</th>
-            <th>Lama Pelaksanaan</th>
-            <th>Perihal</th>
-            <th>Berkas Pendukung</th>
-            <th>Update</th>
-        </tr>
-        <tr align="center">
-            <td>1</td>
-            <td>Yusuf Buddiawan Azri</td>
-            <td>1 Februari 2026</td>
-            <td>5</td>
-            <td>Lomba</td>
-            <td>-</td>
-            <td><a href="./PengajuanSuratTugas_Update.html">Update</a></td>
-        </tr>
-    </table>
+    <div class="page-header">
+    </div>
+
+    <div class="page-wrapper">
+
+        <div class="read-toolbar">
+            <span class="read-toolbar-title">Daftar Pengajuan Surat Tugas</span>
+            <a href="./PengajuanSuratTugas_Create.html">
+                <button class="btn-ajukan">+ Ajukan Surat</button>
+            </a>
+        </div>
+
+        <div class="table-card">
+            <table class="data-table" border="0">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Pengusul</th>
+                        <th>Waktu Pelaksanaan</th>
+                        <th>Lama Pelaksanaan</th>
+                        <th>Perihal</th>
+                        <th>Berkas Pendukung</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Yusuf Buddiawan Azri</td>
+                        <td>1 Februari 2026</td>
+                        <td>5</td>
+                        <td>Lomba</td>
+                        <td>-</td>
+                        <td>
+                            <div class="action-group">
+                                <a class="btn-action btn-edit" href="./PengajuanSuratTugas_Update.html">&#9998;</a>
+                                <button class="btn-action btn-delete">&#128465;</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Yusuf Buddiawan Azri</td>
+                        <td>1 Februari 2026</td>
+                        <td>5</td>
+                        <td>Lomba</td>
+                        <td>-</td>
+                        <td>
+                            <div class="action-group">
+                                <a class="btn-action btn-edit" href="./PengajuanSuratTugas_Update.html">&#9998;</a>
+                                <button class="btn-action btn-delete">&#128465;</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Yusuf Buddiawan Azri</td>
+                        <td>1 Februari 2026</td>
+                        <td>5</td>
+                        <td>Lomba</td>
+                        <td>-</td>
+                        <td>
+                            <div class="action-group">
+                                <a class="btn-action btn-edit" href="./PengajuanSuratTugas_Update.html">&#9998;</a>
+                                <button class="btn-action btn-delete">&#128465;</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
 
 </body>
 
