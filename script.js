@@ -1,8 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
+  //bagian ucup
   const form = document.querySelector(".form-body");
   const perihal = document.getElementById("perihal");
   const berkas = document.getElementById("berkasPendukung");
+  //bagian faiz
+  const pengusul = document.getElementById("pengusul");
+  const waktuPelaksana = document.getElementById("waktuPelaksana");
 
+  //bagian ucup
   let perihalError = document.createElement("span");
   perihalError.className = "error-msg";
   perihal.parentNode.appendChild(perihalError);
@@ -11,6 +16,16 @@ document.addEventListener("DOMContentLoaded", function () {
   berkasError.className = "error-msg";
   berkas.parentNode.appendChild(berkasError);
 
+  //bagian faiz
+  const pengusulError = document.createElement("span");
+  pengusulError.className = "error-msg";
+  pengusul.parentNode.appendChild(pengusulError);
+
+  const waktuError = document.createElement("span");
+  waktuError.className = "error-msg";
+  waktuPelaksana.parentNode.appendChild(waktuError);
+  
+  //bagian ucup
   // validasi perihal
   function validatePerihal() {
     if (perihal.value.trim() === "") {
@@ -47,12 +62,54 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   }
+  
+  //bagian faiz
+  // Validasi Nama Pengusul (Hanya Huruf, Tidak Boleh Kosong)
+  function validatePengusul() {
+    const val = pengusul.value.trim();
+    const regexHuruf = /^[a-zA-Z\s]*$/; 
 
+    if (val === "") {
+      pengusulError.textContent = "Nama pengusul tidak boleh kosong.";
+      return false;
+    } else if (!regexHuruf.test(val)) {
+      pengusulError.textContent = "Nama hanya boleh berisi huruf abjad.";
+      return false;
+    } else {
+      pengusulError.textContent = "";
+      return true;
+    }
+  }
+
+  // Validasi Waktu Pelaksana (Tidak Boleh Kosong)
+  function validateWaktu() {
+    if (waktuPelaksana.value === "") {
+      waktuError.textContent = "Waktu pelaksana harus dipilih.";
+      return false;
+    } else {
+      waktuError.textContent = "";
+      return true;
+    }
+  }
+  
+  //bagian ucup
   perihal.addEventListener("input", validatePerihal);
   berkas.addEventListener("change", validateBerkas);
 
-  form.addEventListener("submit", function (e) {
-    validatePerihal();
-    validateBerkas();
+  //bagian faiz
+  pengusul.addEventListener("input", validatePengusul);
+  waktuPelaksana.addEventListener("change", validateWaktu);
+
+  // Update Event Listener Submit (Tambahkan e.preventDefault agar validasi berfungsi penuh)
+    form.addEventListener("submit", function (e) {
+      const isPengusulValid = validatePengusul();
+      const isWaktuValid = validateWaktu();
+      const isPerihalValid = validatePerihal();
+      const isBerkasValid = validateBerkas();
+  
+      if (!isPengusulValid || !isWaktuValid || !isPerihalValid || !isBerkasValid) {
+        e.preventDefault();
+        alert("Mohon periksa kembali form Anda.");
+      }
+    });
   });
-});
