@@ -338,3 +338,10 @@ body.read-page {
   background-color: #e84118;
   color: #ffffff;
 }
+
+.error-msg {
+  color: red; /* ganti dengan warna yang kamu mau, contoh: #c0151a */
+  font-size: 0.9rem; /* ukuran font */
+  margin-top: 5px; /* jarak dari input */
+  display: block;
+}
