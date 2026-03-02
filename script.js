@@ -1,59 +1,25 @@
-    //Nopal
-    const deleteButtons = document.querySelectorAll(".btn-delete");
-    const editButtons = document.querySelectorAll(".btn-edit");
-    const clearButtons = document.querySelectorAll(".btn-clear");
-    const submitButtons = document.querySelectorAll(".btn-submit");
-
-    deleteButtons.forEach(function(button) {
-        button.addEventListener("click", function () {
-            
-            const konfirmasi = confirm("Apakah Anda yakin ingin menghapus data ini?");
-
-            if(!konfirmasi){
-                event.preventDefault();
-            } else {
-                alert("Data berhasil hihapus");
-            }
-            
-        });
-    });
-
-    editButtons.forEach(function(button) {
-        button.addEventListener("click", function (){
-
-            const konfirmasi = confirm("Apakah Anda yakin ingin mengedit data ini?");
-
-            if(!konfirmasi){
-                event.preventDefault();
-            }
-        });
-    });
-
-    clearButtons.forEach(function(button) {
-        button.addEventListener("click", function (){
-
-            const konfirmasi = confirm("Apakah Anda yakin ingin menghapus data pada form ini?");
-
-            if(!konfirmasi){
-                event.preventDefault();
-            }
-        });
-    });
-
-    submitButtons.forEach(function(button) {
-        button.addEventListener("click", function (){
-
-            const konfirmasi = confirm("Apakah data yang anda isi sudah benar?");
-
-            if(!konfirmasi){
-                event.preventDefault();
-            }
-        });
-    });
-    //Nopal
-
-
 document.addEventListener("DOMContentLoaded", function () {
+  //bagian Nopal
+    function konfirmasiAction(selector, pesan, pesanSukses = null) {
+      const buttons = document.querySelectorAll(selector);
+
+      buttons.forEach(function(button) {
+          button.addEventListener("click", function (event) {
+
+              const konfirmasi = confirm(pesan);
+
+              if (!konfirmasi) {
+                  event.preventDefault();
+              } else if (pesanSukses) {
+                  alert(pesanSukses);
+              }
+          });
+      });
+  }
+
+  konfirmasiAction(".btn-delete", "Apakah Anda yakin ingin menghapus data ini?", "Data berhasil dihapus");
+  konfirmasiAction(".btn-edit", "Apakah Anda yakin ingin mengedit data ini?");
+  
   //bagian ucup
   const form = document.querySelector(".form-body");
   const perihal = document.getElementById("perihal");
@@ -61,6 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
   //bagian faiz
   const pengusul = document.getElementById("pengusul");
   const waktuPelaksana = document.getElementById("waktuPelaksana");
+  //bagian Nopal
+  const lamaPelaksanaan = document.getElementById("lamaPelaksanaan");
 
   //bagian ucup
   let perihalError = document.createElement("span");
@@ -79,6 +47,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const waktuError = document.createElement("span");
   waktuError.className = "error-msg";
   waktuPelaksana.parentNode.appendChild(waktuError);
+
+  //bagian Nopal
+  const lamaError = document.createElement("span");
+  lamaError.className = "error-msg";
+  lamaPelaksanaan.parentNode.appendChild(lamaError);
   
   //bagian ucup
   // validasi perihal
@@ -146,6 +119,30 @@ document.addEventListener("DOMContentLoaded", function () {
       return true;
     }
   }
+
+  //Bagian Nopal
+  //Validasi Lama Pelaksanaan
+  function validateLamaPelaksanaan() {
+    const val = lamaPelaksanaan.value.trim();
+
+    if (val === "") {
+      lamaError.textContent = "Lama pelaksanaan tidak boleh kosong.";
+      return false;
+    }
+
+    const angka = parseInt(val);
+
+    if (isNaN(angka)) {
+      lamaError.textContent = "Lama pelaksanaan harus berupa angka.";
+      return false;
+    } else if (angka < 1) {
+      lamaError.textContent = "Minimal lama pelaksanaan adalah 1 hari.";
+      return false;
+    } else {
+      lamaError.textContent = "";
+      return true;
+    }
+  }
   
   //bagian ucup
   perihal.addEventListener("input", validatePerihal);
@@ -155,14 +152,25 @@ document.addEventListener("DOMContentLoaded", function () {
   pengusul.addEventListener("input", validatePengusul);
   waktuPelaksana.addEventListener("change", validateWaktu);
 
+  //bagian Nopal
+  lamaPelaksanaan.addEventListener("input", validateLamaPelaksanaan);
+  lamaPelaksanaan.addEventListener("blur", function () {
+    let angka = parseInt(lamaPelaksanaan.value);
+
+    if (!isNaN(angka) && angka > 0) {
+      lamaPelaksanaan.value = angka + " hari";
+    }
+  });
+
   // Update Event Listener Submit (Tambahkan e.preventDefault agar validasi berfungsi penuh)
     form.addEventListener("submit", function (e) {
       const isPengusulValid = validatePengusul();
       const isWaktuValid = validateWaktu();
+      const isLamaValid = validateLamaPelaksanaan();
       const isPerihalValid = validatePerihal();
       const isBerkasValid = validateBerkas();
   
-      if (!isPengusulValid || !isWaktuValid || !isPerihalValid || !isBerkasValid) {
+      if (!isPengusulValid || !isWaktuValid || !isLamaValid || !isPerihalValid || !isBerkasValid) {
         e.preventDefault();
         alert("Mohon periksa kembali form Anda.");
       }
