@@ -1321,7 +1321,7 @@ body {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url('Gbr/Profil\ Section.jpg');
+      background-image: url('img/Profil\ Section.jpg');
       background-size: cover;
       background-position: center;
       opacity: 0.10;
@@ -1466,3 +1466,149 @@ body {
 /* ============================================================
   MAIN SECTIONS Nopal— tambahan untuk Hero, Welcome, Profil
 ============================================================ */
+
+
+/* bagian mitra
+/* --- Styling Bagian Mitra --- */
+.mitra-section {
+    background-color: #ffffff;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.container {
+    max-width: 1000px; /* Lebar maksimal konten */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.mitra-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 40px;
+}
+
+/* Wrapper Carousel */
+.carousel-wrapper {
+    position: relative;
+    padding: 10px 0;
+}
+
+.carousel-track-container {
+    overflow: hidden; /* Sembunyikan kartu yang di luar area */
+    width: 100%;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 20px; /* Jarak antar kartu */
+    list-style: none;
+    transition: transform 0.4s ease-in-out; /* Animasi geser yang halus */
+    padding: 0;
+    margin: 0;
+}
+
+/* Ukuran masing-masing kartu (menampilkan 4 kartu) */
+.carousel-slide {
+    flex: 0 0 calc(25% - 15px); /* 25% lebar minus jarak gap */
+    min-width: calc(25% - 15px);
+}
+
+/* Styling Desain Kartu (Mirip background polkadot tipis) */
+.mitra-card {
+    background-color: #fafafa;
+    /* Efek polkadot tipis seperti di gambar */
+    background-image: radial-gradient(#dcdcdc 15%, transparent 15%);
+    background-size: 10px 10px;
+    border-radius: 15px;
+    padding: 30px 15px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.mitra-card img {
+    max-width: 100%;
+    max-height: 80px;
+    object-fit: contain;
+    background-color: #fafafa; /* Latar belakang untuk menutupi polkadot di belakang logo */
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* Posisi tombol navigasi kiri dan kanan */
+.carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Jarak antara tombol dan konten kartu */
+}
+
+.nav-btn {
+    background-color: #ffffff;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    transition: all 0.3s ease;
+    z-index: 10;
+    flex-shrink: 0; /* Agar tombol tidak gepeng */
+}
+
+.nav-btn:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* Memastikan track container mengambil sisa ruang */
+.carousel-track-container {
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+/* Menghilangkan bullet point default */
+.carousel-track {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-nav button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    color: #555;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.carousel-nav button:hover {
+    color: #000;
+}
+
+
+/* Responsif untuk Layar HP/Tablet */
+@media (max-width: 768px) {
+    .carousel-slide {
+        flex: 0 0 calc(50% - 10px); /* Tampilkan 2 kartu di HP */
+        min-width: calc(50% - 10px);
+    }
+}
+@media (max-width: 480px) {
+    .carousel-slide {
+        flex: 0 0 100%; /* Tampilkan 1 kartu di HP layar kecil */
+        min-width: 100%;
+    }
+}

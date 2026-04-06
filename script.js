@@ -136,3 +136,76 @@ counters.forEach(counter => {
 
     updateCounter();
 });
+
+//Bagian Mitra
+document.addEventListener("DOMContentLoaded", function() {
+    const track = document.querySelector('.carousel-track');
+    const nextBtn = document.querySelector('.btn-next');
+    const prevBtn = document.querySelector('.btn-prev');
+    
+    // Hapus variabel dots
+    let currentIndex = 0;
+
+    function getItemsVisible() {
+        if (window.innerWidth > 768) return 4;
+        if (window.innerWidth > 480) return 2;
+        return 1;
+    }
+
+    function updateSlider() {
+        const slides = Array.from(track.children);
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        const gap = 20; 
+        
+        const amountToMove = (slideWidth + gap) * currentIndex;
+        track.style.transform = `translateX(-${amountToMove}px)`;
+        
+        // Bagian update dots sudah dihapus dari sini
+    }
+
+    nextBtn.addEventListener('click', () => {
+        const slides = Array.from(track.children);
+        const itemsVisible = getItemsVisible();
+        
+        if (currentIndex >= slides.length - itemsVisible) {
+            const firstChild = track.firstElementChild;
+            track.appendChild(firstChild);
+            track.style.transition = 'none';
+            currentIndex--;
+            updateSlider();
+            
+            setTimeout(() => {
+                track.style.transition = 'transform 0.5s ease-in-out';
+                currentIndex++;
+                updateSlider();
+            }, 10);
+        } else {
+            currentIndex++;
+            updateSlider();
+        }
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (currentIndex <= 0) {
+            const lastChild = track.lastElementChild;
+            track.insertBefore(lastChild, track.firstElementChild);
+            track.style.transition = 'none';
+            currentIndex++; 
+            updateSlider();
+
+            setTimeout(() => {
+                track.style.transition = 'transform 0.5s ease-in-out';
+                currentIndex--;
+                updateSlider();
+            }, 10);
+        } else {
+            currentIndex--;
+            updateSlider();
+        }
+    });
+
+    window.addEventListener('resize', () => {
+        currentIndex = 0;
+        updateSlider();
+    });
+});
