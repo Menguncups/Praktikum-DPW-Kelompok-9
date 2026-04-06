@@ -32,73 +32,42 @@
         // LANGUAGE TOGGLE — klik untuk ganti bahasa (toggle ID ↔ EN)
         // Otomatis pakai gambar jika file tersedia, fallback ke emoji
         // ============================================================
-        const langBtn = document.getElementById('langToggleBtn');
-        const flagImg = document.getElementById('langFlagImg');
-        const flagEmoji = document.getElementById('langFlagEmoji');
-        const langLabel = document.getElementById('langLabel');
+const langBtn = document.getElementById('langToggleBtn');
+const langLabel = document.getElementById('langLabel');
 
-        // Data bahasa
-        const langData = {
-            id: {
-                src: langBtn.dataset.srcId,
-                emoji: langBtn.dataset.emojiId,
-                label: 'ID',
-                htmlLang: 'id'
-            },
-            en: {
-                src: langBtn.dataset.srcEn,
-                emoji: langBtn.dataset.emojiEn,
-                label: 'EN',
-                htmlLang: 'en'
-            }
-        };
+// Data bahasa
+const langData = {
+    id: {
+        label: 'ID',
+        htmlLang: 'id'
+    },
+    en: {
+        label: 'EN',
+        htmlLang: 'en'
+    }
+};
 
-        // Set tampilan bendera awal
-        function applyLang(lang) {
-            const d = langData[lang];
-            document.documentElement.lang = d.htmlLang;
+// Apply bahasa
+function applyLang(lang) {
+    const d = langData[lang];
 
-            // Coba pakai gambar dulu
-            flagImg.src = d.src;
-            flagImg.alt = d.label;
+    document.documentElement.lang = d.htmlLang;
+    langLabel.textContent = d.label;
+    langBtn.dataset.lang = lang;
 
-            // Emoji fallback (tampil jika gambar error)
-            flagEmoji.textContent = d.emoji;
+    console.log('Bahasa aktif:', lang);
+}
 
-            langLabel.textContent = d.label;
-            langBtn.dataset.lang = lang;
+// Toggle saat klik
+langBtn.addEventListener('click', () => {
+    const current = langBtn.dataset.lang;
+    const next = current === 'id' ? 'en' : 'id';
 
-            // Tampilkan emoji placeholder jika src kosong / belum diisi
-            if (!d.src || d.src === 'bendera-en.png' || d.src === 'bendera-id.png') {
-                // Cek apakah file benar-benar ada dengan Image()
-                const tester = new Image();
-                tester.onload = () => { flagImg.style.display = 'block'; flagEmoji.style.display = 'none'; };
-                tester.onerror = () => { flagImg.style.display = 'none'; flagEmoji.style.display = 'block'; };
-                tester.src = d.src;
-            }
+    applyLang(next);
+});
 
-            console.log('Bahasa aktif:', lang);
-            // Tambahkan logika terjemahan konten halaman di sini
-        }
-
-        // Toggle saat diklik
-        langBtn.addEventListener('click', () => {
-            const current = langBtn.dataset.lang;
-            const next = current === 'id' ? 'en' : 'id';
-
-            // Animasi flip bendera
-            flagImg.classList.add('flipping');
-            flagEmoji.style.animation = 'flagFlip 0.4s ease forwards';
-
-            setTimeout(() => {
-                applyLang(next);
-                flagImg.classList.remove('flipping');
-                flagEmoji.style.animation = '';
-            }, 200); // ganti di tengah animasi flip
-        });
-
-        // Init tampilan awal (bahasa Indonesia)
-        applyLang('id');
+// Init awal
+applyLang('id');
 // ============================================================
 // TUTUP MENU MOBILE SAAT KLIK DI LUAR
 // ============================================================
@@ -143,4 +112,27 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
             hamburgerIcon.className = 'bi bi-list';
         }
     });
+});
+
+
+const counters = document.querySelectorAll('.counter');
+
+counters.forEach(counter => {
+    counter.innerText = '0';
+
+    const updateCounter = () => {
+        const target = +counter.getAttribute('data-target');
+        const current = +counter.innerText;
+
+        const increment = target / 100; // kecepatan animasi
+
+        if (current < target) {
+            counter.innerText = Math.ceil(current + increment);
+            setTimeout(updateCounter, 20);
+        } else {
+            counter.innerText = target;
+        }
+    };
+
+    updateCounter();
 });
