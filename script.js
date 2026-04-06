@@ -1,179 +1,146 @@
-document.addEventListener("DOMContentLoaded", function () {
-  //bagian Nopal
-    function konfirmasiAction(selector, pesan, pesanSukses = null) {
-      const buttons = document.querySelectorAll(selector);
 
-      buttons.forEach(function(button) {
-          button.addEventListener("click", function (event) {
+        // ============================================================
+        // HAMBURGER TOGGLE (mobile)
+        // ============================================================
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const navWrapper = document.getElementById('navWrapper');
+        const hamburgerIcon = hamburgerBtn.querySelector('i');
 
-              const konfirmasi = confirm(pesan);
+        hamburgerBtn.addEventListener('click', () => {
+            navWrapper.classList.toggle('open');
+            hamburgerIcon.className = navWrapper.classList.contains('open')
+                ? 'bi bi-x-lg'
+                : 'bi bi-list';
+        });
 
-              if (!konfirmasi) {
-                  event.preventDefault();
-              } else if (pesanSukses) {
-                  alert(pesanSukses);
-              }
-          });
-      });
-  }
+        // ============================================================
+        // DROPDOWN TOGGLE (mobile — tap untuk buka/tutup)
+        // ============================================================
+        document.querySelectorAll('.nav-menu > li > a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                if (window.innerWidth <= 991) {
+                    const dropdown = this.nextElementSibling;
+                    if (dropdown && dropdown.classList.contains('dropdown-menu-custom')) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('open');
+                    }
+                }
+            });
+        });
 
-  konfirmasiAction(".btn-delete", "Apakah Anda yakin ingin menghapus data ini?", "Data berhasil dihapus");
-  konfirmasiAction(".btn-edit", "Apakah Anda yakin ingin mengedit data ini?");
-  
-  //bagian ucup
-  const form = document.querySelector(".form-body");
-  const perihal = document.getElementById("perihal");
-  const berkas = document.getElementById("berkasPendukung");
-  //bagian faiz
-  const pengusul = document.getElementById("pengusul");
-  const waktuPelaksana = document.getElementById("waktuPelaksana");
-  //bagian Nopal
-  const lamaPelaksanaan = document.getElementById("lamaPelaksanaan");
+        // ============================================================
+        // LANGUAGE TOGGLE — klik untuk ganti bahasa (toggle ID ↔ EN)
+        // Otomatis pakai gambar jika file tersedia, fallback ke emoji
+        // ============================================================
+        const langBtn = document.getElementById('langToggleBtn');
+        const flagImg = document.getElementById('langFlagImg');
+        const flagEmoji = document.getElementById('langFlagEmoji');
+        const langLabel = document.getElementById('langLabel');
 
-  //bagian ucup
-  let perihalError = document.createElement("span");
-  perihalError.className = "error-msg";
-  perihal.parentNode.appendChild(perihalError);
+        // Data bahasa
+        const langData = {
+            id: {
+                src: langBtn.dataset.srcId,
+                emoji: langBtn.dataset.emojiId,
+                label: 'ID',
+                htmlLang: 'id'
+            },
+            en: {
+                src: langBtn.dataset.srcEn,
+                emoji: langBtn.dataset.emojiEn,
+                label: 'EN',
+                htmlLang: 'en'
+            }
+        };
 
-  let berkasError = document.createElement("span");
-  berkasError.className = "error-msg";
-  berkas.parentNode.appendChild(berkasError);
+        // Set tampilan bendera awal
+        function applyLang(lang) {
+            const d = langData[lang];
+            document.documentElement.lang = d.htmlLang;
 
-  //bagian faiz
-  const pengusulError = document.createElement("span");
-  pengusulError.className = "error-msg";
-  pengusul.parentNode.appendChild(pengusulError);
+            // Coba pakai gambar dulu
+            flagImg.src = d.src;
+            flagImg.alt = d.label;
 
-  const waktuError = document.createElement("span");
-  waktuError.className = "error-msg";
-  waktuPelaksana.parentNode.appendChild(waktuError);
+            // Emoji fallback (tampil jika gambar error)
+            flagEmoji.textContent = d.emoji;
 
-  //bagian Nopal
-  const lamaError = document.createElement("span");
-  lamaError.className = "error-msg";
-  lamaPelaksanaan.parentNode.appendChild(lamaError);
-  
-  //bagian ucup
-  // validasi perihal
-  function validatePerihal() {
-    if (perihal.value.trim() === "") {
-      perihalError.textContent = "Perihal harus diisi.";
-      return false;
-    } else if (perihal.value.trim().length < 10) {
-      perihalError.textContent = "Perihal minimal 10 karakter.";
-      return false;
-    } else {
-      perihalError.textContent = "";
-      return true;
+            langLabel.textContent = d.label;
+            langBtn.dataset.lang = lang;
+
+            // Tampilkan emoji placeholder jika src kosong / belum diisi
+            if (!d.src || d.src === 'bendera-en.png' || d.src === 'bendera-id.png') {
+                // Cek apakah file benar-benar ada dengan Image()
+                const tester = new Image();
+                tester.onload = () => { flagImg.style.display = 'block'; flagEmoji.style.display = 'none'; };
+                tester.onerror = () => { flagImg.style.display = 'none'; flagEmoji.style.display = 'block'; };
+                tester.src = d.src;
+            }
+
+            console.log('Bahasa aktif:', lang);
+            // Tambahkan logika terjemahan konten halaman di sini
+        }
+
+        // Toggle saat diklik
+        langBtn.addEventListener('click', () => {
+            const current = langBtn.dataset.lang;
+            const next = current === 'id' ? 'en' : 'id';
+
+            // Animasi flip bendera
+            flagImg.classList.add('flipping');
+            flagEmoji.style.animation = 'flagFlip 0.4s ease forwards';
+
+            setTimeout(() => {
+                applyLang(next);
+                flagImg.classList.remove('flipping');
+                flagEmoji.style.animation = '';
+            }, 200); // ganti di tengah animasi flip
+        });
+
+        // Init tampilan awal (bahasa Indonesia)
+        applyLang('id');
+// ============================================================
+// TUTUP MENU MOBILE SAAT KLIK DI LUAR
+// ============================================================
+document.addEventListener('click', function (e) {
+    const isClickInsideMenu = navWrapper.contains(e.target);
+    const isClickHamburger = hamburgerBtn.contains(e.target);
+
+    if (!isClickInsideMenu && !isClickHamburger) {
+        navWrapper.classList.remove('open');
+        hamburgerIcon.className = 'bi bi-list';
+
+        // Tutup semua dropdown
+        document.querySelectorAll('.dropdown-menu-custom').forEach(drop => {
+            drop.classList.remove('open');
+        });
     }
-  }
+});
 
-  // validasi upload berkas
-  function validateBerkas() {
-    if (berkas.files.length === 0) {
-      berkasError.textContent = "Berkas Pendukung harus diunggah.";
-      return false;
-    } else {
-      const allowedTypes = ["application/pdf", "image/jpeg", "image/png"];
-      const maxSize = 5 * 1024 * 1024; // 5MB
-      const file = berkas.files[0];
 
-      if (!allowedTypes.includes(file.type)) {
-        berkasError.textContent = "Format file harus PDF, JPG, atau PNG.";
-        return false;
-      } else if (file.size > maxSize) {
-        berkasError.textContent = "Ukuran file maksimal 5 MB.";
-        return false;
-      } else {
-        berkasError.textContent = "";
-        return true;
-      }
+// ============================================================
+// RESET SAAT RESIZE (desktop ↔ mobile)
+// ============================================================
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 991) {
+        navWrapper.classList.remove('open');
+        hamburgerIcon.className = 'bi bi-list';
+
+        document.querySelectorAll('.dropdown-menu-custom').forEach(drop => {
+            drop.classList.remove('open');
+        });
     }
-  }
-  
-  //bagian faiz
-  // Validasi Nama Pengusul (Hanya Huruf, Tidak Boleh Kosong)
-  function validatePengusul() {
-    const val = pengusul.value.trim();
-    const regexHuruf = /^[a-zA-Z\s]*$/; 
+});
 
-    if (val === "") {
-      pengusulError.textContent = "Nama pengusul tidak boleh kosong.";
-      return false;
-    } else if (!regexHuruf.test(val)) {
-      pengusulError.textContent = "Nama hanya boleh berisi huruf abjad.";
-      return false;
-    } else {
-      pengusulError.textContent = "";
-      return true;
-    }
-  }
 
-  // Validasi Waktu Pelaksana (Tidak Boleh Kosong)
-  function validateWaktu() {
-    if (waktuPelaksana.value === "") {
-      waktuError.textContent = "Waktu pelaksana harus dipilih.";
-      return false;
-    } else {
-      waktuError.textContent = "";
-      return true;
-    }
-  }
-
-  //Bagian Nopal
-  //Validasi Lama Pelaksanaan
-  function validateLamaPelaksanaan() {
-    const val = lamaPelaksanaan.value.trim();
-
-    if (val === "") {
-      lamaError.textContent = "Lama pelaksanaan tidak boleh kosong.";
-      return false;
-    }
-
-    const angka = parseInt(val);
-
-    if (isNaN(angka)) {
-      lamaError.textContent = "Lama pelaksanaan harus berupa angka.";
-      return false;
-    } else if (angka < 1) {
-      lamaError.textContent = "Minimal lama pelaksanaan adalah 1 hari.";
-      return false;
-    } else {
-      lamaError.textContent = "";
-      return true;
-    }
-  }
-  
-  //bagian ucup
-  perihal.addEventListener("input", validatePerihal);
-  berkas.addEventListener("change", validateBerkas);
-
-  //bagian faiz
-  pengusul.addEventListener("input", validatePengusul);
-  waktuPelaksana.addEventListener("change", validateWaktu);
-
-  //bagian Nopal
-  lamaPelaksanaan.addEventListener("input", validateLamaPelaksanaan);
-  lamaPelaksanaan.addEventListener("blur", function () {
-    let angka = parseInt(lamaPelaksanaan.value);
-
-    if (!isNaN(angka) && angka > 0) {
-      lamaPelaksanaan.value = angka + " hari";
-    }
-  });
-
-  // Update Event Listener Submit (Tambahkan e.preventDefault agar validasi berfungsi penuh)
-    form.addEventListener("submit", function (e) {
-      const isPengusulValid = validatePengusul();
-      const isWaktuValid = validateWaktu();
-      const isLamaValid = validateLamaPelaksanaan();
-      const isPerihalValid = validatePerihal();
-      const isBerkasValid = validateBerkas();
-  
-      if (!isPengusulValid || !isWaktuValid || !isLamaValid || !isPerihalValid || !isBerkasValid) {
-        e.preventDefault();
-        alert("Mohon periksa kembali form Anda.");
-      }
+// ============================================================
+// OPTIONAL: CLOSE MENU SETELAH KLIK LINK (mobile UX lebih enak)
+// ============================================================
+document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.innerWidth <= 991) {
+            navWrapper.classList.remove('open');
+            hamburgerIcon.className = 'bi bi-list';
+        }
     });
-  });
-
+});

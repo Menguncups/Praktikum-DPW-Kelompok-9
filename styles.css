@@ -1,347 +1,401 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-body {
-  font-family: "Roboto", Arial, sans-serif;
-  background-color: #2e2e2e;
-  min-height: 100vh;
-}
 
-/* PAGE HEADER */
-.page-header {
-  background-color: #c0151a;
-  width: 100%;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  padding: 0 32px;
-}
+    :root {
+      --merah: #c0152a;
+      --merah-gelap: #9a0e20;
+      --merah-hover: #e01830;
+      --putih: #ffffff;
+      --abu-muda: #f5f5f5;
+      --teks-gelap: #1a1a1a;
+      --navbar-height: 70px;
+      --font-utama: 'Poppins', sans-serif;
+      --shadow-navbar: 0 4px 20px rgba(192, 21, 42, 0.25);
+      --shadow-dropdown: 0 8px 30px rgba(0,0,0,0.15);
+      --transition: 0.25s ease;
+    }
 
-.page-header-title {
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-.page-wrapper {
-  display: flex;
-  justify-content: center;
-  background-color: #2e2e2e;
-  min-height: calc(100vh - 56px);
-}
+    body {
+      font-family: var(--font-utama);
+      background: var(--abu-muda);
+      color: var(--teks-gelap);
+      /* Pastikan konten tidak tertutup navbar */
+      padding-top: var(--navbar-height);
+    }
 
-.sidebar-left,
-.sidebar-right {
-  background-color: #d0d0d0;
-  flex: 1;
-}
 
-.form-container {
-  background-color: #4a4a4a;
-  width: 540px;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 36px;
-}
+    /* ---- HEADER ---- */
+    #main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--navbar-height);
+      background: var(--merah);
+      box-shadow: var(--shadow-navbar);
+      z-index: 1050;
+      display: flex;
+      align-items: center;
+    }
 
-.form-container h1 {
-  font-size: 14px;
-  font-weight: 700;
-  color: #ffffff;
-  text-align: center;
-  padding: 16px 0;
-  margin-bottom: 28px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
+    /* ---- NAVBAR INNER ---- */
+    .navbar-inner {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      gap: 16px;
+    }
 
-.form-body {
-  padding: 0 32px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
+    /* ---- BRAND / LOGO ---- */
+    .navbar-brand-custom {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 16px;
-}
-
-.form-group label {
-  font-size: 11px;
-  font-weight: 700;
-  color: #f0f0f0;
-  margin-bottom: 5px;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-}
-
-.form-group input[type="text"],
-.form-group input[type="date"],
-.form-group textarea,
-.form-group input[type="file"] {
-  font-family: "Roboto", Arial, sans-serif;
-  background-color: #d6d6d6;
-  border: none;
-  border-left: 4px solid #c0151a;
-  padding: 9px 11px;
-  font-size: 13px;
-  color: #1a1a1a;
-  outline: none;
-  width: 100%;
-}
-
-.form-group input[type="text"]:focus,
-.form-group input[type="date"]:focus,
-.form-group textarea:focus {
-  border-left-color: #8f0f13;
-  background-color: #e4e4e4;
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 76px;
-  font-family: "Roboto", Arial, sans-serif;
-}
-
-.form-group input[type="file"] {
-  padding: 7px 11px;
-  cursor: pointer;
-}
-
-.form-divider {
-  border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  margin: 22px 0 18px 0;
-}
-
-.form-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-}
-
-.btn-back {
-  font-family: "Roboto", Arial, sans-serif;
-  padding: 8px 18px;
-  font-size: 12px;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
-  background-color: #95a5a6;
-  color: #f0f0f0;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: background-color 0.2s;
-}
-
-.btn-back:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.btn-clear {
-  font-family: "Roboto", Arial, sans-serif;
-  padding: 8px 18px;
-  font-size: 12px;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
-  background-color: #e74c3c;
-  color: #ffffff;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: background-color 0.2s;
-}
-
-.btn-clear:hover {
-  background-color: rgba(192, 21, 26, 0.22);
-}
-
-.btn-submit {
-  font-family: "Roboto", Arial, sans-serif;
-  padding: 8px 22px;
-  font-size: 12px;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-  background-color: #2ecc71;
-  color: #ffffff;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: background-color 0.2s;
-}
-
-.btn-submit:hover {
-  background-color: #2c6e00;
-}
-
-body.read-page {
-  background-color: #f2f2f2;
-  font-family: "Roboto", Arial, sans-serif;
-}
-
-.read-page .page-header {
-  background-color: #c0151a;
-  /* border-bottom: 3px solid #8f0f13; */
-}
-
-.read-page .page-wrapper {
-  background-color: #f2f2f2;
-  display: block;
-  padding: 32px 40px 48px 40px;
-  min-height: calc(100vh - 56px);
-}
-
-.read-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.read-toolbar-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: #1a1a1a;
-  letter-spacing: 0.3px;
-}
-
-.btn-ajukan {
-  font-family: "Roboto", Arial, sans-serif;
-  background-color: #c0151a;
-  color: #ffffff;
-  border: none;
-  padding: 10px 24px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  border-radius: 4px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  transition: background-color 0.2s;
-}
-
-.btn-ajukan:hover {
-  background-color: #8f0f13;
-}
-
-.table-card {
-  background-color: #ffffff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #c0151a;
-}
-
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: "Roboto", Arial, sans-serif;
-  font-size: 13px;
-}
-
-.data-table thead tr {
-  background-color: #c0151a;
-}
-
-.data-table th {
-  text-align: center;
-  padding: 13px 14px;
-  font-weight: 700;
-  color: #ffffff;
-  font-size: 13px;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-}
-
-.data-table tbody tr {
-  border-bottom: 1px solid #ebebeb;
-  transition: background-color 0.15s;
-}
-
-.data-table tbody tr:nth-child(even) {
-  background-color: #fdf3f3;
-}
-
-.data-table tbody tr:hover {
-  background-color: #fde8e8;
-}
-
-.data-table tbody tr:last-child {
-  border-bottom: none;
-}
-
-.data-table td {
-  text-align: center;
-  padding: 12px 14px;
-  color: #333333;
-  font-size: 13px;
-}
-
-.link-update {
-  font-family: "Roboto", Arial, sans-serif;
-  color: #ffffff;
-  background-color: #c0151a;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 0.3px;
-  padding: 5px 14px;
-  border-radius: 3px;
-  display: inline-block;
-  text-transform: uppercase;
-  transition: background-color 0.2s;
-}
-
-.link-update:hover {
-  background-color: #8f0f13;
-}
-.action-group {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-}
-
-.btn-action {
-  font-family: "Roboto", Arial, sans-serif;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 34px;
-  height: 34px;
-  border: none;
-  border-radius: 50%;
-  font-size: 15px;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.btn-action:hover {
-  opacity: 0.85;
-}
-
-.btn-edit {
-  background-color: #28a745;
-  color: #ffffff;
-}
-
-.btn-delete {
-  background-color: #e84118;
-  color: #ffffff;
-}
-
-.error-msg {
-  color: red; /* ganti dengan warna yang kamu mau, contoh: #c0151a */
-  font-size: 0.9rem; /* ukuran font */
-  margin-top: 5px; /* jarak dari input */
+.navbar-brand-custom img.logo {
+  height: 45px;
+  width: auto;
   display: block;
 }
+
+    .brand-logo-box img {
+      height: 44px;
+      width: auto;
+      display: block;
+    }
+
+    /* Placeholder teks sementara jika logo belum ada */
+    .brand-logo-text {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--merah);
+      letter-spacing: 1px;
+    }
+
+    .brand-title {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-title .univ-name {
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .brand-title .fak-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--putih);
+      letter-spacing: 0.5px;
+    }
+
+    /* ---- MENU NAVIGASI ---- */
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 2px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-menu > li {
+      position: relative;
+    }
+
+    .nav-menu > li > a {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 14px;
+      color: var(--putih);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border-radius: 6px;
+      transition: background var(--transition), color var(--transition);
+      white-space: nowrap;
+    }
+
+    .nav-menu > li > a .caret-icon {
+      font-size: 0.65rem;
+      transition: transform var(--transition);
+      opacity: 0.75;
+    }
+
+    /* Hover pada menu utama */
+    .nav-menu > li > a:hover,
+    .nav-menu > li:hover > a {
+      background: rgba(255,255,255,0.18);
+      color: var(--putih);
+    }
+
+    .nav-menu > li:hover > a .caret-icon {
+      transform: rotate(180deg);
+    }
+
+    /* ---- DROPDOWN ---- */
+    .dropdown-menu-custom {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 220px;
+      background: var(--putih);
+      border-radius: 10px;
+      box-shadow: var(--shadow-dropdown);
+      border-top: 3px solid var(--merah);
+      list-style: none;
+      padding: 8px 0;
+      margin: 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+      z-index: 2000;
+    }
+
+    .nav-menu > li:hover .dropdown-menu-custom {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu-custom li a {
+      display: block;
+      padding: 9px 18px;
+      color: var(--teks-gelap);
+      font-size: 0.82rem;
+      font-weight: 400;
+      text-decoration: none;
+      transition: background var(--transition), color var(--transition), padding-left var(--transition);
+      border-radius: 0;
+    }
+
+    .dropdown-menu-custom li a:hover {
+      background: rgba(192, 21, 42, 0.07);
+      color: var(--merah);
+      padding-left: 24px;
+    }
+
+    .dropdown-menu-custom li + li {
+      border-top: 1px solid #f0f0f0;
+    }
+
+    /* ---- LANGUAGE TOGGLE (tombol bendera dalam nav menu) ---- */
+    .lang-toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255,255,255,0.13);
+      border: 1.5px solid rgba(255,255,255,0.28);
+      border-radius: 8px;
+      padding: 5px 11px 5px 6px;
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+      outline: none;
+      height: 38px;
+      margin-left: 4px;
+    }
+
+    .lang-toggle-btn:hover {
+      background: rgba(255,255,255,0.22);
+      border-color: rgba(255,255,255,0.55);
+    }
+
+    .lang-toggle-btn:active { transform: scale(0.95); }
+
+    /* Gambar bendera */
+    .lang-flag {
+      width: 28px;
+      height: 20px;
+      border-radius: 4px;
+      object-fit: cover;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.35);
+      display: block;
+    }
+
+    .lang-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--putih);
+      letter-spacing: 0.5px;
+      font-family: var(--font-utama);
+      white-space: nowrap;
+    }
+
+    /* Animasi flip saat ganti bendera */
+    @keyframes flagFlip {
+      0%   { transform: scaleX(1);  opacity: 1; }
+      45%  { transform: scaleX(0);  opacity: 0.2; }
+      55%  { transform: scaleX(0);  opacity: 0.2; }
+      100% { transform: scaleX(1);  opacity: 1; }
+    }
+    .lang-flag.flipping { animation: flagFlip 0.4s ease forwards; }
+
+    /* ---- HAMBURGER (mobile) ---- */
+    .hamburger-btn {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--putih);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 4px;
+      line-height: 1;
+    }
+
+    /* ---- MOBILE MENU ---- */
+    @media (max-width: 991px) {
+      .hamburger-btn { display: block; }
+
+      .nav-wrapper {
+        display: none;
+        position: fixed;
+        top: var(--navbar-height);
+        left: 0;
+        width: 100%;
+        background: var(--merah-gelap);
+        padding: 12px 0 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        z-index: 1040;
+        max-height: calc(100vh - var(--navbar-height));
+        overflow-y: auto;
+      }
+
+      .nav-wrapper.open { display: block; }
+
+      .nav-menu {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 0 16px;
+      }
+
+      .nav-menu > li > a {
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+      }
+
+      .dropdown-menu-custom {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        border-left: 3px solid rgba(255,255,255,0.3);
+        background: rgba(0,0,0,0.15);
+        border-radius: 0 0 8px 8px;
+        display: none;
+        margin-left: 12px;
+        margin-bottom: 4px;
+      }
+
+      .dropdown-menu-custom.open { display: block; }
+
+      .dropdown-menu-custom li a {
+        color: rgba(255,255,255,0.85);
+        font-size: 0.85rem;
+        padding: 9px 16px;
+      }
+
+      .dropdown-menu-custom li a:hover {
+        background: rgba(255,255,255,0.1);
+        color: var(--putih);
+        padding-left: 24px;
+      }
+
+      .dropdown-menu-custom li + li { border-top: 1px solid rgba(255,255,255,0.1); }
+
+      .lang-toggle-btn {
+        margin: 12px 16px 0;
+        width: calc(100% - 32px);
+        justify-content: center;
+        height: 42px;
+      }
+    }
+
+
+    /* ---- CONTENT ---- */
+    #main-content {
+      min-height: calc(100vh - var(--navbar-height) - 200px);
+      padding: 40px 24px;
+    }
+
+    /* Contoh area konten — hapus/ganti sesuai kebutuhan */
+    .content-placeholder {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--putih);
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      text-align: center;
+    }
+
+    .content-placeholder h2 {
+      color: var(--merah);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .content-placeholder p {
+      color: #555;
+      line-height: 1.7;
+    }
+
+
+    /* ---- FOOTER ---- */
+    #main-footer {
+      background: var(--merah-gelap);
+      color: rgba(255,255,255,0.85);
+      padding: 40px 24px 20px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .footer-col h5 {
+      color: var(--putih);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-col p,
+    .footer-col a {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.8;
+      text-decoration: none;
+      display: block;
+    }
+
+    .footer-col a:hover { color: var(--putih); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 16px auto 0;
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+    }
