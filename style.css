@@ -399,3 +399,158 @@
       font-size: 0.75rem;
       color: rgba(255,255,255,0.4);
     }
+
+    /*Bagian Faiz
+     /* Reset Dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Background body agar menyerupai screenshot (opsional) */
+    background-color: #f4f4f4; 
+}
+
+/* --- Styling Footer Utama --- */
+.site-footer {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 60px 0 30px;
+    font-size: 14px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 30px;
+    padding-right: 20px;
+}
+
+/* Kolom pertama sedikit lebih lebar */
+.col-brand {
+    flex: 1.5; 
+}
+
+/* --- Teks dan Tipografi --- */
+.footer-col h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col a {
+    color: #cccccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-col a:hover {
+    color: #ffffff;
+}
+
+/* --- Area Logo dan Alamat --- */
+.footer-logo {
+    max-width: 250px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.brand-subtitle {
+    color: #cccccc;
+    margin-bottom: 20px;
+}
+
+.social-icons {
+    margin-bottom: 20px;
+}
+
+.social-icons a {
+    display: inline-block;
+    color: #ffffff;
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+.address {
+    color: #cccccc;
+    line-height: 1.6;
+}
+
+/* --- Area Kontak (Say hello) --- */
+.contact-label {
+    color: #cccccc;
+    margin-bottom: 5px;
+}
+
+.support-link {
+    color: #ffffff;
+    text-decoration: underline;
+    display: block;
+}
+
+.mt-20 {
+    margin-top: 25px;
+}
+
+.contact-number {
+    color: #ffffff;
+}
+
+/* --- Footer Bawah (Kebijakan Privasi) --- */
+.footer-bottom {
+    border-top: 1px solid #222222;
+    padding-top: 25px;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: #999999;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.footer-bottom a {
+    color: #cccccc;
+    text-decoration: underline;
+}
+
+.footer-bottom a:hover {
+    color: #ffffff;
+}
+
+/* --- Responsivitas (Untuk HP dan Tablet) --- */
+@media (max-width: 768px) {
+    .footer-row {
+        flex-direction: column;
+    }
+    .footer-col {
+        margin-bottom: 40px;
+        padding-right: 0;
+    }
+}
+    
